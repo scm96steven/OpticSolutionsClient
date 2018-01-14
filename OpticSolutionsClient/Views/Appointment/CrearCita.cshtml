@@ -1,0 +1,328 @@
+﻿@model OpticSolutionsClient.Repositories.Entitys.Appointment
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<div class="container">
+    <div class="row">
+        @using (Html.BeginForm("CrearCita", "Appointment", FormMethod.Post, null))
+        {
+            <div class="box box-primary box-solid">
+                <div class="box-header">
+                    <p class="box-title"><i class="fa fa-pencil-square"></i> Crear Nueva Cita</p>
+                </div>
+
+                <div class="box-body">
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="col-md-6">
+
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label for="StartDateStr" class="control-label col-md-3">Seleccione una fecha</label>
+                                <div class="col-md-4">
+
+                                    <input type="date" name="StartDateStr" id="appDate" class="form-control datepicker" value="@Model.StartDateStr">
+
+                                    @*@Html.TextBoxFor(m => m.StartDateStr, "{0:yyyy-MM-dd}", new { @type = "date", name = "StartDateStr", id = "appDate", @class = "form-control datepicker", value = @Model.StartDateStr })*@
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="box box-success box-solid" id="test" style="display:none">
+                <div class="box-header">
+                    <p class="box-title">Disponibilidad del dia</p>
+
+                </div>
+                <div class="box-body">
+
+                    <div id="timeline">
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <div class="form-horizontal">
+
+
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+
+                                <label for="DoctorUsername" class="control-label col-md-2">Doctor</label>
+                                <div class="col-md-10">
+                                    <select style="width:100%" id="doctorSelect" name="DoctorUsername"></select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Names" class="control-label col-md-2">Nombres</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Names, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Names, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Last_Names" class="control-label col-md-2">Apellidos</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Last_Names, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Last_Names, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="IdentificationCard" class="control-label col-md-2">Cedula</label>
+                                <div class="col-md-10">
+
+                                    <input type="number" name="IdentificationCard"
+                                           pattern="[1-9]{11}" title="Cedula sin guiones" class="form-control col-md-2" placeholder="01026505475">
+                                    @Html.ValidationMessageFor(model => model.IdentificationCard, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Phone" class="control-label col-md-2">Telefono</label>
+                                <div class="col-md-10">
+                                    @if (Model.Phone != null)
+                                    {
+                                        <input type="text" name="Phone"
+                                               pattern="[0-9]{5-11}" title="telefono sin guiones" class="form-control col-md-2" placeholder="8095003355"
+                                               value="@Model.Phone">
+                                    }
+                                    else
+                                    {
+                                        <input type="text" name="Phone"
+                                               pattern="[0-9]{5-11}" title="telefono sin guiones" class="form-control col-md-2" placeholder="8095003355">
+                                    }
+
+                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="Comment" class="control-label col-md-2">Comentario</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Hora de inicio</label>
+                                <div class="col-md-10">
+                                    @if (Model.StartHourStr != null)
+                                    {
+                                        <input name="StartHourStr" id="startHour" class="timepicker" type="time"
+                                               value="@Model.StartHourStr" />
+                                    }
+                                    else
+                                    {
+                                        <input name="StartHourStr" id="startHour" class="timepicker" type="time" />
+                                    }
+
+                                    @Html.ValidationMessageFor(model => model.StartHourStr, "", new { @class = "text-danger" })
+
+                                    @if (Model.NumberOfAppointments > 0)
+                                    {
+                                        <p class="text-danger">Seleccione otra hora, @Model.StartHourStr no esta disponible</p>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+
+                                    <input type="submit" value="Siguiente" class="btn btn-success form-control" />
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    </div>
+</div>
+
+
+<script src="~/Content/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+
+
+
+
+    function drawDoctorChart() {
+
+
+
+
+        google.charts.load('current', { 'packages': ['timeline'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+
+        function drawChart() {
+            var container = document.getElementById('timeline');
+            var chart = new google.visualization.Timeline(container);
+
+            var jsonData = "";
+         var appDate = $("#appDate").val();
+
+                $.ajax({
+                    type: 'GET',
+                    data: { Date: appDate },
+                url: '@Url.Action("GetAppointments", "Appointment")',
+                success: function (data) {
+                    console.log(data);
+                    jsonData = data;
+
+                    if (jsonData.length > 0)
+                    {
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Doctor');
+                        data.addColumn('date', 'Start');
+                        data.addColumn('date', 'End');
+                        debugger;
+                        $.each(jsonData, function (i, jsonData) {
+                            var name = jsonData.DoctorFullname;
+                            var startHour = jsonData.StartHour;
+                            var endHour = jsonData.EndHour;
+
+                            var startMinute = jsonData.StartMinute;
+                            var endMinute = jsonData.EndMinute;
+
+
+                            data.addRows([[name, new Date(0, 0, 0, startHour, startMinute, 0), new Date(0, 0, 0, endHour, endMinute, 0)]]);
+                        });
+
+
+
+                        var options = {
+                            timeline: { colorByRowLabel: true },
+                            backgroundColor: '#ffd',
+                            title: "Disponibilidad del dia",
+
+                        };
+
+                        chart.draw(data);
+
+                    }
+                    else
+                    {
+                        var text = $('<h3/>', {
+                            'html': 'No hay citas pautadas para ese dia, todos los doctores estan disponibles'
+                        });
+                        $("#timeline").append(text);
+                    }
+
+                }
+                 });
+
+
+
+        }
+    };
+
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script type="text/javascript">
+
+      $(document).ready(function () {
+
+          //$('.appDate').datepicker();
+
+
+          var startDt = document.getElementById("appDate").value;
+          var endDt = new Date();
+
+          if ((new Date(startDt).getTime() >= new Date(endDt).getTime()))
+          {
+              console.log($("#appDate").val());
+              console.log($("#appDate").val().length);
+              $("#timeline").empty();
+              $("#test").show("slow");
+
+              setTimeout(drawDoctorChart, 600);
+          }
+          else
+          {
+
+
+
+          }
+
+
+
+          $("#appDate").change(function () {
+
+              $("#test").hide("slow");
+              $("#timeline").empty();
+
+              var startDt = document.getElementById("appDate").value;
+              var endDt = new Date();
+
+
+              if ((new Date(startDt).getTime() >= new Date(endDt).getTime()))
+              {
+                  $("#test").show("slow");
+                  setTimeout(drawDoctorChart, 600);
+              }
+              else {
+
+
+              }
+
+
+
+
+          });
+
+
+
+          $.ajax({
+              type: 'GET',
+              url: '@Url.Action("GetDoctors", "Appointment")',
+
+              success: function (data) {
+                  console.log(data);
+                  $("#doctorSelect").empty();
+                  var selected = "@Model.DoctorUsername";
+
+                  $.each(data, function (index, item) {
+                      var userName = item.UserName;
+                      var p = new Option(item.FirstName + " " + item.LastName, item.UserName);
+                      console.log(selected);
+                      $("#doctorSelect").append(p);
+
+                  });
+                  $("#doctorSelect").val(selected);
+              }
+          });
+    });
+
+</script>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OpticSolutionsClient.Repositories;
+using OpticSolutionsClient.Repositories.Entitys;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,7 @@ namespace OpticSolutionsClient.Controllers
 {
     public class HomeController : Controller
     {
+        
         public ActionResult Index()
         {
             return View();
@@ -15,7 +18,6 @@ namespace OpticSolutionsClient.Controllers
 
         public ActionResult Services()
         {
-      
 
             return View();
         }
@@ -29,15 +31,9 @@ namespace OpticSolutionsClient.Controllers
         public ActionResult Blog()
         {
         
-
             return View();
         }
 
-        public ActionResult Portfolio()
-        {
-       
-
-            return View();
-        }
+     
     }
 }

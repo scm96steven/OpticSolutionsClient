@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="DataRepositories.cs" />
     <Compile Include="Entitys\Appointment.cs" />
+    <Compile Include="Entitys\AppUser.cs" />
     <Compile Include="Entitys\Doctor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

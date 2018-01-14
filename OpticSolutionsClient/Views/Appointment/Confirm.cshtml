@@ -1,0 +1,101 @@
+﻿@model OpticSolutionsClient.Repositories.Entitys.Appointment
+
+@{
+
+}
+<div class="container">
+    @using (Html.BeginForm("CreateAppointment", "Appointment", FormMethod.Post, null))
+    {
+        <div class="box box-primary box-solid">
+            <div class="box-header">
+                <p class="box-title">Confirmar cita</p>
+
+            </div>
+            <div class="box-body">
+                <div>
+
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Doctor
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DoctorFullname)
+                            <input type="hidden" name="DoctorUsername" value='@Model.DoctorUsername' />
+                        </dd>
+
+                        <dt>
+                            Nombres
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Names)
+                            <input type="hidden" name="Names" value=@Model.Names />
+                        </dd>
+
+                        <dt>
+                            Apellidos
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Last_Names)
+                            <input type="hidden" name="Last_Names" value=@Model.Last_Names />
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                            <input type="hidden" name="Email" value=@Model.Email />
+                        </dd>
+                        <dt>
+                            Telefono
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Phone)
+                            <input type="hidden" name="Phone" value=@Model.Phone />
+                        </dd>
+
+                        <dt>
+                            Cedula
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.IdentificationCard)
+                            <input type="hidden" name="IdentificationCard" value=@Model.IdentificationCard />
+                        </dd>
+
+                        <dt>
+                            Comentario
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Comment)
+                            <input type="hidden" name="Comment" value=@Model.Comment />
+                        </dd>
+
+                        <dt>
+                            Fecha y hora
+                        </dt>
+
+                        <dd>
+
+                            @Html.DisplayFor(model => model.StartDate)
+                            <input type="hidden" name="StartDate" value='@Model.StartDate' />
+                        </dd>
+
+                    </dl>
+
+                    <input action="action" onclick="window.history.go(-1); return false;" type="button" value="Atras" class="btn btn-danger" />
+                    <input type="submit" value="Confirmar Cita" class="btn btn-success" />
+
+
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
