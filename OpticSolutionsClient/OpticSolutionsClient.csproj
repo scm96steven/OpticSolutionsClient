@@ -170,6 +170,7 @@
     <Content Include="Content\css\set1.css" />
     <Content Include="Content\css\set2.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\Favicon.ico" />
     <Content Include="Content\fonts\feathericons\feathericons.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
