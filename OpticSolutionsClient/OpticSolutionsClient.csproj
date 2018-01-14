@@ -152,6 +152,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\AdminLTE.css" />
     <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\animate.min.css" />
     <Content Include="Content\css\bootstrap-theme.css" />
@@ -212,8 +213,10 @@
     <Content Include="Content\img\b.jpg" />
     <Content Include="Content\img\c.jpg" />
     <Content Include="Content\img\d.jpg" />
+    <Content Include="Content\img\Eyecontacts.jpg" />
     <Content Include="Content\img\EyeGlasses.jpg" />
     <Content Include="Content\img\Girlglasses.jpg" />
+    <Content Include="Content\img\lauren_1.jpg" />
     <Content Include="Content\img\ophtalmologist.jpg" />
     <Content Include="Content\img\RedGlasses.jpg" />
     <Content Include="Content\img\SightExam.jpg" />
