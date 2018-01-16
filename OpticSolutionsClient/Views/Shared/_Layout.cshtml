@@ -11,6 +11,7 @@
     </title>
     <link rel="icon" href="@Url.Content("~/Content/favicon.ico")" />
     <!-- Bootstrap -->
+    <link href="~/Content/css/AdminLTE.css" rel="stylesheet" />
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/Content/css/animate.css">
     <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
@@ -21,7 +22,7 @@
     <link rel="stylesheet" type="~/Content/text/css" href="css/set1.css" />
     <link href="~/Content/css/overwrite.css" rel="stylesheet">
     <link href="~/Content/css/style.css" rel="stylesheet">
-    <link href="~/Content/css/AdminLTE.css" rel="stylesheet" />
+
     <!-- =======================================================
       Theme Name: eNno
       Theme URL: https://bootstrapmade.com/enno-free-simple-bootstrap-template/
@@ -49,6 +50,7 @@
                         <li role="presentation"><a href="@Url.Action("Index","Home")">Inicio</a></li>
                         <li role="presentation"><a href="@Url.Action("Services","Home")">Servicios</a></li>
                         <li role="presentation"><a href="@Url.Action("CrearCita","Appointment")">Solicitud de Cita</a></li>
+                        <li role="presentation"><a href="@Url.Action("Status","Home")">Estado de orden</a></li>
                         <li role="presentation" @*class="active"*@><a href="@Url.Action("Contact","Home")">Contacto</a></li>
                     </ul>
                 </div>
@@ -82,29 +84,12 @@
         <div class="last-div">
             <div class="container">
                 <div class="row">
-                    <div class="copyright">
-                        &copy; eNno Theme. All Rights Reserved
-                        <div class="credits">
-                            <!--
-                              All the links in the footer should remain intact.
-                              You can delete the links only if you purchased the pro version.
-                              Licensing information: https://bootstrapmade.com/license/
-                              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=eNno
-                            -->
-                            <a href="https://bootstrapmade.com/">Bootstrap Themes</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                        </div>
-                    </div>
+          
                 </div>
             </div>
             <div class="container">
                 <div class="row">
-                    <ul class="social-network">
-                        <li><a href="#" data-placement="top" title="Facebook"><i class="fa fa-facebook fa-1x"></i></a></li>
-                        <li><a href="#" data-placement="top" title="Twitter"><i class="fa fa-twitter fa-1x"></i></a></li>
-                        <li><a href="#" data-placement="top" title="Linkedin"><i class="fa fa-linkedin fa-1x"></i></a></li>
-                        <li><a href="#" data-placement="top" title="Pinterest"><i class="fa fa-pinterest fa-1x"></i></a></li>
-                        <li><a href="#" data-placement="top" title="Google plus"><i class="fa fa-google-plus fa-1x"></i></a></li>
-                    </ul>
+                
                 </div>
             </div>
             <a href="" class="scrollup"><i class="fa fa-chevron-up"></i></a>
