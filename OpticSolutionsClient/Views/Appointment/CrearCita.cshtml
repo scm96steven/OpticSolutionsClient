@@ -1,47 +1,53 @@
 ﻿@model OpticSolutionsClient.Repositories.Entitys.Appointment
 <link href="~/Content/css/AdminLTE.css" rel="stylesheet" />
+<link href="~/Content/css/Client.css" rel="stylesheet" />
+
 
 @using (Html.BeginForm("CrearCita", "Appointment", FormMethod.Post, null))
 {
 <div class="container wow bounceIn" data-wow-offset="0" data-wow-delay="0.4s">
     <div class="row">
+       
         <div class="service">
+            <div id="alert">
+
+            </div>
             <div class="col-md-6 col-md-offset-3">
-                <div class="text-center">
-                    <h2>Crear nueva cita</h2>
-                    <div class="icon">
-                        <i class="fa fa-calendar-o fa-5x"></i>
-                    </div>
+                
+                <div class="panel panel-default material-panel material-panel_info pad">
+                    <h4 class="material-panel__heading">Crear una cita</h4>
+                    <div class="material-panel__body">
 
-                </div>
-                <hr>
-                <div class="panel panel-info ">
-                    @*<div class="panel-heading">
-                <p class="box-title"><i class="fa fa-pencil-square"></i> Crear Nueva Cita</p>
-            </div>*@
-
-                    <div class="panel-body">
-
-                        @Html.AntiForgeryToken()
-
-                        <div class="col-md-6 col-md-offset-3">
-
-                            <div class="form-horizontal">
-                                <div class="form-group">
-                                    <label for="StartDateStr" class="control-label">Seleccione una fecha</label>
-                             
-
-                                        <input type="date" name="StartDateStr" id="appDate" class="form-control datepicker" value="@Model.StartDateStr">
-
-                               
-                                </div>
-
+                        <div class="text-center">
+                            <h2>Seleccione la fecha</h2>
+                            <div class="icon">
+                                <i class="fa fa-calendar-o fa-5x"></i>
                             </div>
 
                         </div>
-                    </div>
+                        <div class="text-center">
+                            @Html.AntiForgeryToken()
+                            <div class="col-md-4 col-lg-offset-4">
+
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <input type="date" name="StartDateStr" id="appDate" class="form-control datepicker" value="@Model.StartDateStr">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <hr>
+                        </div>
+                        </div>
                 </div>
+            
+        
+               
+              
             </div>
+       
         </div>
     </div>
 
@@ -49,12 +55,12 @@
      
    
 
-            <div class="box box-success box-solid" id="test" style="display:none">
-                <div class="box-header">
-                    <p class="box-title">Disponibilidad del dia</p>
+            <div class="panel panel-default material-panel material-panel_info" id="test" style="display:none">
+                <div class="panel-heading material-panel__heading">
+                    <p class="panel-title ">Disponibilidad del dia</p>
 
                 </div>
-                <div class="box-body">
+                <div class="panel-body material-panel__body">
 
                     <div id="timeline">
 
@@ -166,7 +172,7 @@
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
 
-                                    <input type="submit" value="Siguiente" class="btn btn-success form-control" />
+                                    <input type="submit" value="Siguiente" class="btn material-btn_primary material-btn form-control" />
                                 </div>
                             </div>
 
@@ -185,6 +191,7 @@
 
 <script src="~/Content/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script type="text/javascript">
 
 
@@ -268,14 +275,26 @@
 
       $(document).ready(function () {
 
-          //$('.appDate').datepicker();
-
-
-          var startDt = document.getElementById("appDate").value;
-          var endDt = new Date();
-
-          if ((new Date(startDt).getTime() >= new Date(endDt).getTime()))
+             if (@Model.NumberOfAppointments>0)
           {
+
+              var text = '<div class="alert alert-danger alert-dismissible"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+                  '<h4><i class="icon fa fa-info"></i> ¡Atencion!</h4>' +
+                  'Seleccione otra hora, la seleccionada no esta disponible' +
+                  ' </div>';
+              $("#alert").append(text);
+
+          }
+          else
+          {
+              $("#alert").empty();
+          }
+
+
+
+             var startDt = $("#appDate").val();
+
+          if (startDt.length > 9) {
               console.log($("#appDate").val());
               console.log($("#appDate").val().length);
               $("#timeline").empty();
@@ -283,35 +302,20 @@
 
               setTimeout(drawDoctorChart, 600);
           }
-          else
-          {
-
-
-
-          }
-
-
+   
 
           $("#appDate").change(function () {
 
+              var startDate = $("#appDate").val();
               $("#test").hide("slow");
               $("#timeline").empty();
 
-              var startDt = document.getElementById("appDate").value;
-              var endDt = new Date();
 
-
-              if ((new Date(startDt).getTime() >= new Date(endDt).getTime()))
+              if (startDate.length > 9)
               {
                   $("#test").show("slow");
                   setTimeout(drawDoctorChart, 600);
               }
-              else {
-
-
-              }
-
-
 
 
           });

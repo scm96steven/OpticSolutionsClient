@@ -1,0 +1,57 @@
+﻿@model OpticSolutions.Repositories.Entitys.Order
+
+
+<link href="~/Content/css/AdminLTE.css" rel="stylesheet" />
+<link href="~/Content/css/Client.css" rel="stylesheet" />
+
+<div class="service">
+
+    <div id="alert">
+
+    </div>
+    <div class="col-md-6 col-md-offset-3">
+
+        <div class="panel panel-default material-panel material-panel_info pad">
+            <h4 class="material-panel__heading">Ver estado de orden</h4>
+            <div class="material-panel__body">
+
+                <div class="text-center">
+                    <h2>Escriba el numero de orden</h2>
+                    <div class="icon">
+                        <i class="fa fa-calendar-o fa-5x"></i>
+                    </div>
+
+                </div>
+                <div class="text-center">
+                    @Html.AntiForgeryToken()
+                    <div class="col-md-4 col-lg-offset-4">
+
+                        @using (Html.BeginForm("ViewStatus", "Home", FormMethod.Post, null))
+                        {
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <input type="number" name="OrderId" id="OrderId" class="form-control datepicker" value="@Model.OrderId">
+
+                            </div>
+                            <input type="submit" class="btn material-btn_success" value="Verificar"/>
+                        </div>
+                        }
+                    </div>
+                  
+                </div>
+            </div>
+            <br/>
+            <hr>
+        </div>
+
+
+
+
+    </div>
+    <br /><br /><br />
+
+
+
+</div>
+
+

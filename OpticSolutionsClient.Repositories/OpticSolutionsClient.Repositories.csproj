@@ -48,6 +48,8 @@
     <Compile Include="Entitys\Appointment.cs" />
     <Compile Include="Entitys\AppUser.cs" />
     <Compile Include="Entitys\Doctor.cs" />
+    <Compile Include="Entitys\Order.cs" />
+    <Compile Include="Entitys\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

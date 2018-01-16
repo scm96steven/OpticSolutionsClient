@@ -1,0 +1,84 @@
+﻿@model OpticSolutions.Repositories.Entitys.Order
+
+
+<link href="~/Content/css/AdminLTE.css" rel="stylesheet" />
+<link href="~/Content/css/Client.css" rel="stylesheet" />
+
+<div class="service">
+
+
+@if (Model.OrderStatusDescription != null)
+{
+    <div class="col-md-6 col-md-offset-3">
+
+        <div class="panel panel-default material-panel material-panel_info pad">
+
+            <div class="text-center">
+                <h2>Detalle de orden #@Model.OrderId</h2>
+          
+
+            </div>
+            <div class="text-center">
+                @Html.AntiForgeryToken()
+                <div class="col-md-4 col-lg-offset-4">
+
+                    <div class="row invoice-info">
+                       
+                            <b>Factura #@Model.OrderId</b><br />
+                            <b>Cliente: </b>@Model.ClientName<br />
+                            <b>Telefono: </b>@Model.ClientPhone<br />
+                            <b>Fecha y hora:</b> @Model.CreatedDate<br />
+                    
+                    
+
+                    </div>
+
+                
+             
+                </div>
+                <div class="icon">
+                    @if (Model.OrderStatusId == 2)
+                    {
+                        <i class="fa fa-spinner fa-5x fa-da-" style="color:red;"></i>
+                        <h4><b> Trabajo en progreso</b></h4>
+                    }
+                    else if (Model.OrderStatusId == 3)
+                    {
+                        <i class="fa fa-calendar-o fa-5x fa-da-"></i>
+                        <h4><b> @Model.OrderStatusDescription</b></h4>
+                    }
+                    else if (Model.OrderStatusId == 1)
+                    {
+                        <i class="fa fa-check fa-5x" style="color:green;"></i>
+                        <h4><b>@Model.OrderStatusDescription</b></h4>
+                    }
+
+                
+
+
+                </div>
+           
+            </div>
+            <hr>
+        </div>
+     
+    </div>
+
+  
+}
+else
+{
+    <div class="col-md-6 col-md-offset-3">
+<h3>No existe una orden con ese numero.</h3>
+
+
+
+
+    </div>
+    <hr>
+
+}
+
+</div>
+
+

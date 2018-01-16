@@ -57,7 +57,7 @@ namespace OpticSolutionsClient.Repositories
         public void CreateAppointment(Appointment ap)
         {
             conn.Open();
-            ap.EndDate = ap.StartDate.AddMinutes(29);
+            ap.EndDate = ap.StartDate.AddMinutes(14);
 
             ap.Date = DateTime.Now;
 
@@ -109,5 +109,31 @@ namespace OpticSolutionsClient.Repositories
             conn.Close();
             return data;
         }
+
+
+        public Order GetOrderById(Order ord)
+        {
+
+            conn.Open();
+            var queryParameters = new DynamicParameters();
+            queryParameters.Add("@order_id", ord.OrderId);
+
+            var list = conn.Query<Order>("TRACK_ORDERS_BY_ID", queryParameters, commandType: System.Data.CommandType.StoredProcedure).ToList();
+            var productList = conn.Query<Product>("GET_ORDER_BY_ID", queryParameters, commandType: System.Data.CommandType.StoredProcedure).ToList();
+
+            Order order = list.FirstOrDefault();
+            order.OrderDetails = productList;
+            ord.Total = 0;
+
+            foreach (Product item in order.OrderDetails)
+            {
+                order.Total = order.Total + (item.Quantity * item.Price);
+            }
+
+            conn.Close();
+            return order;
+        }
+
+
     }
 }

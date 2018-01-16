@@ -1,4 +1,5 @@
-﻿using OpticSolutionsClient.Repositories;
+﻿using OpticSolutions.Repositories.Entitys;
+using OpticSolutionsClient.Repositories;
 using OpticSolutionsClient.Repositories.Entitys;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,9 @@ namespace OpticSolutionsClient.Controllers
 {
     public class HomeController : Controller
     {
-        
+
+        DataRepositories repo = new DataRepositories();
+
         public ActionResult Index()
         {
             return View();
@@ -24,11 +27,24 @@ namespace OpticSolutionsClient.Controllers
 
         public ActionResult Contact()
         {
-         
+
 
             return View();
         }
+        public ActionResult Status()
+        {
+            Order ord = new Order();
 
-     
+            return View(ord);
+        }
+
+        [HttpPost]
+        public ActionResult ViewStatus(Order ord)
+        {
+            var data = repo.GetOrderById(ord);
+
+            return View(data);
+        }
+
     }
 }

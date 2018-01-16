@@ -1,4 +1,5 @@
-﻿using OpticSolutionsClient.Repositories;
+﻿using CaptchaMvc.HtmlHelpers;
+using OpticSolutionsClient.Repositories;
 using OpticSolutionsClient.Repositories.Entitys;
 using System;
 using System.Collections.Generic;
@@ -44,9 +45,12 @@ namespace OpticSolutionsClient.Controllers
 
 
             ap.Date = DateTime.Now;
-
-            string start = ap.StartDateStr + " " + ap.StartHourStr;
-            ap.StartDate = DateTime.Parse(start);
+            if (ap.StartDate==null)
+            {
+                string start = ap.StartDateStr + " " + ap.StartHourStr;
+                ap.StartDate = DateTime.Parse(start);
+            }
+   
             var userRepo = new DataRepositories();
             var user = repo.GetUserInfoById(ap.DoctorUsername);
             ap.DoctorFullname = user.FullName();
@@ -58,11 +62,15 @@ namespace OpticSolutionsClient.Controllers
         [HttpPost]
         public ActionResult CreateAppointment(Appointment ap)
         {
+            if (this.IsCaptchaValid("Captcha is not valid"))
+            {
+                //ap.StartDate = DateTime.Parse(ap.StartDateStr);
+                repo.CreateAppointment(ap);
 
-            //ap.StartDate = DateTime.Parse(ap.StartDateStr);
-            repo.CreateAppointment(ap);
+                return RedirectToAction("Index", "Home", null);
+            }
 
-            return RedirectToAction("Index", "Home", null);
+            return RedirectToAction("Confirm", "Appointment", ap);
         }
 
         public ActionResult PendingAppointment(Appointment ap)
