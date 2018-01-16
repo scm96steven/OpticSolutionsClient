@@ -1,17 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title>
-        @if (!string.IsNullOrWhiteSpace(ViewBag.Title))
+        @*@if (!string.IsNullOrWhiteSpace(ViewBag.Title))
         {
             @ViewBag.Title@: -
-        }
+        }*@
         OpticSolutions
     </title>
     <link rel="icon" href="@Url.Content("~/Content/favicon.ico")" />
     <!-- Bootstrap -->
-    <link href="~/Content/css/AdminLTE.css" rel="stylesheet" />
+   <link href="~/Content/css/AdminLTE.css" rel="stylesheet" />
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/Content/css/animate.css">
     <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
@@ -58,9 +59,9 @@
         </div>
     </nav>
 
-
-         @RenderBody()
-  
+    <div class="row">
+        @RenderBody()
+    </div>
 
     <footer>
         <div class="inner-footer">
@@ -82,16 +83,7 @@
         </div>
 
         <div class="last-div">
-            <div class="container">
-                <div class="row">
-          
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                
-                </div>
-            </div>
+      
             <a href="" class="scrollup"><i class="fa fa-chevron-up"></i></a>
         </div>
     </footer>

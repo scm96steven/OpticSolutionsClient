@@ -1,39 +1,53 @@
 ﻿@model OpticSolutionsClient.Repositories.Entitys.Appointment
+<link href="~/Content/css/AdminLTE.css" rel="stylesheet" />
 
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<div class="container">
+@using (Html.BeginForm("CrearCita", "Appointment", FormMethod.Post, null))
+{
+<div class="container wow bounceIn" data-wow-offset="0" data-wow-delay="0.4s">
     <div class="row">
-        @using (Html.BeginForm("CrearCita", "Appointment", FormMethod.Post, null))
-        {
-            <div class="box box-primary box-solid">
-                <div class="box-header">
-                    <p class="box-title"><i class="fa fa-pencil-square"></i> Crear Nueva Cita</p>
+        <div class="service">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="text-center">
+                    <h2>Crear nueva cita</h2>
+                    <div class="icon">
+                        <i class="fa fa-calendar-o fa-5x"></i>
+                    </div>
+
                 </div>
+                <hr>
+                <div class="panel panel-info ">
+                    @*<div class="panel-heading">
+                <p class="box-title"><i class="fa fa-pencil-square"></i> Crear Nueva Cita</p>
+            </div>*@
 
-                <div class="box-body">
+                    <div class="panel-body">
 
-                    @Html.AntiForgeryToken()
+                        @Html.AntiForgeryToken()
 
-                    <div class="col-md-6">
+                        <div class="col-md-6 col-md-offset-3">
 
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <label for="StartDateStr" class="control-label col-md-3">Seleccione una fecha</label>
-                                <div class="col-md-4">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="StartDateStr" class="control-label">Seleccione una fecha</label>
+                             
 
-                                    <input type="date" name="StartDateStr" id="appDate" class="form-control datepicker" value="@Model.StartDateStr">
+                                        <input type="date" name="StartDateStr" id="appDate" class="form-control datepicker" value="@Model.StartDateStr">
 
-                                    @*@Html.TextBoxFor(m => m.StartDateStr, "{0:yyyy-MM-dd}", new { @type = "date", name = "StartDateStr", id = "appDate", @class = "form-control datepicker", value = @Model.StartDateStr })*@
-
+                               
                                 </div>
+
                             </div>
 
                         </div>
-
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+     
+   
 
             <div class="box box-success box-solid" id="test" style="display:none">
                 <div class="box-header">
@@ -164,10 +178,10 @@
             </div>
 
 
-        }
+      
     </div>
 </div>
-
+}
 
 <script src="~/Content/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -249,7 +263,7 @@
     };
 
 </script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
 <script type="text/javascript">
 
       $(document).ready(function () {
