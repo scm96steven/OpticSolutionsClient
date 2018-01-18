@@ -122,12 +122,17 @@ namespace OpticSolutionsClient.Repositories
             var productList = conn.Query<Product>("GET_ORDER_BY_ID", queryParameters, commandType: System.Data.CommandType.StoredProcedure).ToList();
 
             Order order = list.FirstOrDefault();
-            order.OrderDetails = productList;
-            ord.Total = 0;
 
-            foreach (Product item in order.OrderDetails)
+            if (order!=null)
             {
-                order.Total = order.Total + (item.Quantity * item.Price);
+                order.OrderDetails = productList;
+                ord.Total = 0;
+
+                foreach (Product item in order.OrderDetails)
+                {
+                    order.Total = order.Total + (item.Quantity * item.Price);
+                }
+
             }
 
             conn.Close();

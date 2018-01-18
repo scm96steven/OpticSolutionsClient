@@ -31,9 +31,9 @@ namespace OpticSolutionsClient.Controllers
 
             return View();
         }
-        public ActionResult Status()
+        public ActionResult Status(Order ord)
         {
-            Order ord = new Order();
+        
 
             return View(ord);
         }
@@ -43,7 +43,16 @@ namespace OpticSolutionsClient.Controllers
         {
             var data = repo.GetOrderById(ord);
 
-            return View(data);
+            if (data!=null)
+            {
+                return View(data);
+            }
+            else
+            {
+                return RedirectToAction("Status", ord);
+            }
+
+           
         }
 
     }
